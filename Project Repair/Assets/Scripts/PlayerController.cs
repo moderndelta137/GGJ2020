@@ -119,6 +119,20 @@ public class PlayerController : MonoBehaviour
 
         knockBacking = true;
 
+        // 持っているアイテムを落とす
+        if(Carrying)
+        {
+            pickup_object.transform.localPosition = Putdown_position_offset;
+            pickup_object.transform.SetParent(null);
+            pickup_object.GetComponent<Collider>().isTrigger = true;
+            Carrying = false;
+
+            float drop_angle = Random.Range(0, 360);
+            float drop_power = 10.0f;
+            //Vector3 drop_vector = Qurtanion. * this.transform.forward * drop_power
+            //pickup_object.GetComponent<Rigidbody>().AddForce();
+        }
+
         // 後ろ向きの力を加える
         float power = 10.0f;
         rigidbody.AddForce(- transform.forward * power, ForceMode.Impulse);
