@@ -51,17 +51,27 @@ public class PlayerController : MonoBehaviour
     //Wincondition
     private PieceManager piecemanager;
 
+    private PlayerController player1Object;
+    private PlayerController player2Object;
+
+    public bool playerStunFlg = false;
+    public bool playerToughFlg = false;
+
     // Start is called before the first frame update
     void Start()
     {
         Carrying = false;
         Pickup_prompt.SetActive(false);
         rigidbody = this.GetComponent<Rigidbody>();
+
+        player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
+        player2Object = GameObject.Find("Player2").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerStunFlg) return;
         if (knockBacking) return;
         
         //Handle Movement
@@ -193,7 +203,10 @@ public class PlayerController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Player":
-                KnockBack(other.transform.position-this.transform.position);
+                if (!playerToughFlg)
+                {
+                    KnockBack(other.transform.position - this.transform.position);
+                }
                 break;
             default:
                 break;
@@ -226,6 +239,23 @@ public class PlayerController : MonoBehaviour
                     pickup_object = other.gameObject;
                     */
                     break;
+                case "ToughItem":
+                    Destroy(other.gameObject);
+                    playerToughFlg = true;
+                    Invoke("returnPlayerTough", 5.0f);
+                    break;
+                case "StunItem":
+                    // アイテム触れたらアイテムObj消す
+                    Destroy(other.gameObject);
+                    if (Which_player == 1)
+                    {
+                        player2Object.Stun();
+                    }
+                    else
+                    {
+                        player1Object.Stun();
+                    }
+                    break;
                 case "Player":
                     break;
             }
@@ -255,5 +285,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Stun()
+    {
+        playerStunFlg = true;
+        Invoke("returnPlayerStun", 5.0f);
+    }
 
+    public void returnPlayerStun()
+    {
+        playerStunFlg = false;
+    }
+
+    public void returnPlayerTough()
+    {
+        playerToughFlg = false;
+    }
 }
