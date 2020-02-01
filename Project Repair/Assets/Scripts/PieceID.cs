@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PieceID : MonoBehaviour
 {
-    public int ID;
     // Whose piece
-    public int whichPiece = 1;
+    public int whichPiece;
 
     // Whether this is collected
     public bool isCollected = false;
@@ -21,8 +20,7 @@ public class PieceID : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("player1 : " + player1.currentPiecesCount);
-        Debug.Log("player2 : " + player2.currentPiecesCount);
+
     }
 
 
@@ -42,11 +40,13 @@ public class PieceID : MonoBehaviour
             // 集めた破片の数をプラス１
             if (whichPiece == 1)
             {
-                player2.currentPiecesCount++;
+                Debug.Log("Player1 Score");
+                player1.currentPiecesCount++;
             }
             else
             {
-                player1.currentPiecesCount++;
+                Debug.Log("Player2 Score");
+                player2.currentPiecesCount++;
             }
         }
     }
@@ -66,11 +66,11 @@ public class PieceID : MonoBehaviour
             // 集めた破片の数をマイナス１
             if (whichPiece == 1)
             {
-                player2.currentPiecesCount--;
+                player1.currentPiecesCount--;
             }
             else
             {
-                player1.currentPiecesCount--;
+                player2.currentPiecesCount--;
             }
         }
     }

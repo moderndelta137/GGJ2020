@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
             //Putting down
             else if (Carrying == true)
             {
-                Debug.Log("Pressed");
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
                 pickup_object.GetComponent<Rigidbody>().isKinematic = false;
