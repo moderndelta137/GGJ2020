@@ -6,8 +6,7 @@ TagManager:
   tags:
   - Piece
   - Item
-  - StunItem
-  - ToughItem
+  - CollectZone
   layers:
   - Default
   - TransparentFX
