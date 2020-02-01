@@ -83,10 +83,12 @@ public class PlayerController : MonoBehaviour
             //Putting down
             else if (Carrying == true)
             {
+                piecemanager.Last_moved_piece = pickup_object;
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
+ 
             }
         }
 
