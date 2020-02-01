@@ -46,3 +46,6 @@ MonoBehaviour:
   pieceObject: {fileID: 8746718816809611362, guid: 39dc9ebd7d1e9124db1c4bee80e8f071,
     type: 3}
   distribute_piece: 10
+  distribute_range: {x: 9, y: 0.5, z: 7.5}
+  Player1_piece_mat: {fileID: 2100000, guid: 810d3e932b69af94485ca2e1593671a2, type: 2}
+  Player2_piece_mat: {fileID: 2100000, guid: 6bf40bd9cdb7255468fb9011da2b9079, type: 2}
