@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private PlayerController player2Object;
 
     public bool playerStunFlg = false;
+    public bool playerToughFlg = false;
 
     // Start is called before the first frame update
     void Start()
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviour
 
         // 後ろ向きの力を加える
         float power = 10.0f;
-        rigidbody.AddForce(- transform.forward * power, ForceMode.Impulse);
+        rigidbody.AddForce(-transform.forward * power, ForceMode.Impulse);
         Invoke("returnKnockBack", 1.0f);
     }
     /// <summary>
@@ -196,7 +197,10 @@ public class PlayerController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Player":
-                KnockBack();
+                if (!playerToughFlg)
+                {
+                    KnockBack();
+                }
                 break;
             default:
                 break;
@@ -228,6 +232,9 @@ public class PlayerController : MonoBehaviour
                     */
                     break;
                 case "ToughItem":
+                    Destroy(other.gameObject);
+                    playerToughFlg = true;
+                    Invoke("returnPlayerTough", 5.0f);
                     break;
                 case "StunItem":
                     // アイテム触れたらアイテムObj消す
@@ -271,5 +278,16 @@ public class PlayerController : MonoBehaviour
     public void Stun()
     {
         playerStunFlg = true;
+        Invoke("returnPlayerStun", 5.0f);
+    }
+
+    public void returnPlayerStun()
+    {
+        playerStunFlg = false;
+    }
+
+    public void returnPlayerTough()
+    {
+        playerToughFlg = false;
     }
 }
