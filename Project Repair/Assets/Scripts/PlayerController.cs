@@ -28,6 +28,10 @@ public class PlayerController : MonoBehaviour
     //Need to specify the Pickup_prompt gameobject;
     public GameObject Pickup_prompt;
     public Vector3 Pickup_prompt_position_offset;
+
+    // For knock back
+    private bool knockBacking = false;
+    private Rigidbody rigidbody;
     //Tag definition
     //Piece = 破片
     //Item = 邪魔用アイテム
@@ -45,11 +49,14 @@ public class PlayerController : MonoBehaviour
         Carrying = false;
         Pickup_prompt.SetActive(false);
         piecemanager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+        rigidbody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (knockBacking) return;
+        
         //Handle Movement
         //Get Axis input
         move_input.z = Input.GetAxis("Vertical" + Which_player.ToString());
@@ -100,6 +107,41 @@ public class PlayerController : MonoBehaviour
                 pickup_object.transform.Rotate(Carry_rotate_speed);
 
             }
+        }
+    }
+
+    /// <summary>
+    /// プレイヤー同士が衝突した際の吹っ飛び処理
+    /// </summary>
+    void KnockBack()
+    {
+        if (knockBacking) return;
+
+        knockBacking = true;
+
+        // 後ろ向きの力を加える
+        float power = 10.0f;
+        rigidbody.AddForce(- transform.forward * power, ForceMode.Impulse);
+        Invoke("returnKnockBack", 1.0f);
+    }
+    /// <summary>
+    /// 数秒後にKnockBackから回復する。knockBackingフラグを戻す。
+    /// </summary>
+    /// <returns></returns>
+    void returnKnockBack()
+    {
+        knockBacking = false;
+    }
+
+    public void OnCollisionEnter(Collision other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Player":
+                KnockBack();
+                break;
+            default:
+                break;
         }
     }
 
