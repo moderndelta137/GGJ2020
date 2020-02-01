@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     //Need to specifiy which player is controlling this character;
     public int Which_player;
 
+    // Current Pieces Count
+    public int currentPiecesCount = 0;
+
     //Character Movement
     public float Move_speed;
     public float Rotate_speed;
@@ -114,12 +117,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // check whether pieces are dropped
         if(dropped_object)
         {
-            //Debug.Log(dropped_object);
             checkPieces();
-
         }
+
     }
 
     /// <summary>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pieces : MonoBehaviour
+public class CollectZone : MonoBehaviour
 {
-    public bool dropping = false;
+    public int whichPlayer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +17,4 @@ public class Pieces : MonoBehaviour
     {
         
     }
-
-
 }
