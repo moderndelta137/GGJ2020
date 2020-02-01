@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 4150214477629531232}
   - component: {fileID: 4150214477629531233}
   - component: {fileID: 4150214477629531247}
+  - component: {fileID: 6025349622411440505}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -196,6 +197,7 @@ MonoBehaviour:
   Putdown_position_offset: {x: 0, y: -0.6, z: 1}
   Pickup_prompt: {fileID: 4150214477551647948}
   Pickup_prompt_position_offset: {x: 0, y: 1, z: 0}
+  Carry_rotate_speed: {x: 0, y: 0, z: 0}
 --- !u!54 &4150214477629531247
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -212,6 +214,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &6025349622411440505
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150214477629531235}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4150214478390334174
 GameObject:
   m_ObjectHideFlags: 0
