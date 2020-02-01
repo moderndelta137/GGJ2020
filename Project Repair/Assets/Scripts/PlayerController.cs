@@ -15,8 +15,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 move_transform = Vector3.zero;
 
 
-
-
     //Pickup Related
     //Whether if the object can be picked up
     private bool can_pickup;
@@ -36,10 +34,10 @@ public class PlayerController : MonoBehaviour
     // For drop items
     private GameObject dropped_object;
 
-
     //Tag definition
     //Piece = 破片
     //Item = 邪魔用アイテム
+    //StunItem = 相手を行動不能
     //Object =　ピックアップできるものの
 
     //Carry rotate
@@ -48,6 +46,11 @@ public class PlayerController : MonoBehaviour
     //Wincondition
     private PieceManager piecemanager;
 
+    private PlayerController player1Object;
+    private PlayerController player2Object;
+
+    public bool playerStunFlg = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,13 +58,19 @@ public class PlayerController : MonoBehaviour
         Pickup_prompt.SetActive(false);
         piecemanager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
         rigidbody = this.GetComponent<Rigidbody>();
+
+        player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
+        player2Object = GameObject.Find("Player2").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (knockBacking) return;
-        
+
+
+        if (playerStunFlg == true) return;
+
         //Handle Movement
         //Get Axis input
         move_input.z = Input.GetAxis("Vertical" + Which_player.ToString());
@@ -134,7 +143,6 @@ public class PlayerController : MonoBehaviour
         // 持っているアイテムを落とす
         if(Carrying)
         {
-
             Rigidbody rigidbody_dropped_obj = pickup_object.GetComponent<Rigidbody>();
 
             // アイテムを地面に置く
@@ -219,6 +227,20 @@ public class PlayerController : MonoBehaviour
                     pickup_object = other.gameObject;
                     */
                     break;
+                case "ToughItem":
+                    break;
+                case "StunItem":
+                    // アイテム触れたらアイテムObj消す
+                    Destroy(other.gameObject);
+                    if (Which_player == 1)
+                    {
+                        player2Object.Stun();
+                    }
+                    else
+                    {
+                        player1Object.Stun();
+                    }
+                    break;
                 case "Player":
                     break;
             }
@@ -246,5 +268,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public void Stun()
+    {
+        playerStunFlg = true;
+    }
 }
