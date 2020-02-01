@@ -86,9 +86,9 @@ public class PlayerController : MonoBehaviour
             {
                 if (pickup_object != null)//Necessary???
                 {
-                    //pickup_object.GetComponent<Collider>().isTrigger = false;
                     pickup_object.transform.SetParent(this.gameObject.transform);
                     pickup_object.transform.localPosition = Carrying_position_offset;
+                    pickup_object.GetComponent<Rigidbody>().isKinematic = true;
                     can_pickup = false;
                     Carrying = true;
                     Pickup_prompt.SetActive(false);
@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Pressed");
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
+                pickup_object.GetComponent<Rigidbody>().isKinematic = false;
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
             }
@@ -139,9 +140,10 @@ public class PlayerController : MonoBehaviour
             Rigidbody rigidbody_dropped_obj = pickup_object.GetComponent<Rigidbody>();
 
             // アイテムを地面に置く
-            pickup_object.GetComponent<Collider>().isTrigger = false;
             pickup_object.transform.localPosition = Putdown_position_offset;
             pickup_object.transform.SetParent(null);
+            pickup_object.GetComponent<Rigidbody>().isKinematic = false;
+            pickup_object.GetComponent<Collider>().isTrigger = false;
             rigidbody_dropped_obj.useGravity = true;
 
             Carrying = false;
@@ -178,8 +180,8 @@ public class PlayerController : MonoBehaviour
     {
         if(dropped_object.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
         {
-            dropped_object.GetComponent<Rigidbody>().useGravity = false;
             dropped_object.GetComponent<Collider>().isTrigger = true;
+            dropped_object.GetComponent<Rigidbody>().useGravity = false;
             dropped_object.transform.rotation = Quaternion.identity;
             Vector3 pos = dropped_object.transform.position;
             dropped_object.transform.position = new Vector3(pos.x, 0.4f, pos.z);
