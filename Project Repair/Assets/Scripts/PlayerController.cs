@@ -116,10 +116,16 @@ public class PlayerController : MonoBehaviour
                     pickup_object = other.gameObject;
                     break;
                 case "Item":
+                    // アイテム触れたらアイテムObj消す
+                    Destroy(other.gameObject);
+                    //
+                    Move_speed = Move_speed * 2;
+                    /*
                     can_pickup = true;
                     Pickup_prompt.SetActive(true);
                     Pickup_prompt.transform.position = other.transform.position + Pickup_prompt_position_offset;
                     pickup_object = other.gameObject;
+                    */
                     break;
                 case "Player":
                     break;
