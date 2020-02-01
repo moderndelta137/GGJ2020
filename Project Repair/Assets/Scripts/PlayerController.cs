@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
                     Destroy(other.gameObject);
                     //
                     Move_speed = Move_speed * 2;
+                    Invoke("returnMoveSpeed", 5.0f);
                     /*
                     can_pickup = true;
                     Pickup_prompt.SetActive(true);
@@ -299,5 +300,10 @@ public class PlayerController : MonoBehaviour
     public void returnPlayerTough()
     {
         playerToughFlg = false;
+    }
+
+    public void returnMoveSpeed()
+    {
+        Move_speed = Move_speed / 2;
     }
 }
