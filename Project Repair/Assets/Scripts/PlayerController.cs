@@ -8,11 +8,16 @@ public class PlayerController : MonoBehaviour
     //Need to specifiy which player is controlling this character;
     public int Which_player;
 
+    // Current Pieces Count
+    public int currentPiecesCount = 0;
+
     //Character Movement
     public float Move_speed;
     public float Rotate_speed;
     private Vector3 move_input=Vector3.zero;
     private Vector3 move_transform = Vector3.zero;
+
+
 
 
     //Pickup Related
@@ -34,10 +39,10 @@ public class PlayerController : MonoBehaviour
     // For drop items
     private GameObject dropped_object;
 
+
     //Tag definition
     //Piece = 破片
     //Item = 邪魔用アイテム
-    //StunItem = 相手を行動不能
     //Object =　ピックアップできるものの
 
     //Carry rotate
@@ -57,7 +62,6 @@ public class PlayerController : MonoBehaviour
     {
         Carrying = false;
         Pickup_prompt.SetActive(false);
-        piecemanager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
         rigidbody = this.GetComponent<Rigidbody>();
 
         player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
@@ -67,11 +71,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerStunFlg) return;
         if (knockBacking) return;
-
-
-        if (playerStunFlg == true) return;
-
+        
         //Handle Movement
         //Get Axis input
         move_input.z = Input.GetAxis("Vertical" + Which_player.ToString());
@@ -94,9 +96,9 @@ public class PlayerController : MonoBehaviour
             {
                 if (pickup_object != null)//Necessary???
                 {
-                    //pickup_object.GetComponent<Collider>().isTrigger = false;
                     pickup_object.transform.SetParent(this.gameObject.transform);
                     pickup_object.transform.localPosition = Carrying_position_offset;
+                    pickup_object.GetComponent<Rigidbody>().isKinematic = true;
                     can_pickup = false;
                     Carrying = true;
                     Pickup_prompt.SetActive(false);
@@ -105,12 +107,12 @@ public class PlayerController : MonoBehaviour
             //Putting down
             else if (Carrying == true)
             {
-                piecemanager.Last_moved_piece = pickup_object;
+                Debug.Log("Pressed");
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
+                pickup_object.GetComponent<Rigidbody>().isKinematic = false;
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
- 
             }
         }
 
@@ -124,18 +126,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // check whether pieces are dropped
         if(dropped_object)
         {
-            //Debug.Log(dropped_object);
             checkPieces();
-
         }
+
     }
 
     /// <summary>
     /// プレイヤー同士が衝突した際の吹っ飛び処理
     /// </summary>
-    void KnockBack()
+    void KnockBack(Vector3 Hit_direction)
     {
         if (knockBacking) return;
 
@@ -144,12 +146,14 @@ public class PlayerController : MonoBehaviour
         // 持っているアイテムを落とす
         if(Carrying)
         {
+
             Rigidbody rigidbody_dropped_obj = pickup_object.GetComponent<Rigidbody>();
 
             // アイテムを地面に置く
-            pickup_object.GetComponent<Collider>().isTrigger = false;
             pickup_object.transform.localPosition = Putdown_position_offset;
             pickup_object.transform.SetParent(null);
+            pickup_object.GetComponent<Rigidbody>().isKinematic = false;
+            pickup_object.GetComponent<Collider>().isTrigger = false;
             rigidbody_dropped_obj.useGravity = true;
 
             Carrying = false;
@@ -165,7 +169,9 @@ public class PlayerController : MonoBehaviour
 
         // 後ろ向きの力を加える
         float power = 10.0f;
-        rigidbody.AddForce(-transform.forward * power, ForceMode.Impulse);
+        Hit_direction.y = 0;
+        Vector3.Normalize(Hit_direction);
+        rigidbody.AddForce(-Hit_direction * power, ForceMode.Impulse);
         Invoke("returnKnockBack", 1.0f);
     }
     /// <summary>
@@ -184,8 +190,8 @@ public class PlayerController : MonoBehaviour
     {
         if(dropped_object.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
         {
-            dropped_object.GetComponent<Rigidbody>().useGravity = false;
             dropped_object.GetComponent<Collider>().isTrigger = true;
+            dropped_object.GetComponent<Rigidbody>().useGravity = false;
             dropped_object.transform.rotation = Quaternion.identity;
             Vector3 pos = dropped_object.transform.position;
             dropped_object.transform.position = new Vector3(pos.x, 0.4f, pos.z);
@@ -199,7 +205,7 @@ public class PlayerController : MonoBehaviour
             case "Player":
                 if (!playerToughFlg)
                 {
-                    KnockBack();
+                    KnockBack(other.transform.position - this.transform.position);
                 }
                 break;
             default:
@@ -215,9 +221,11 @@ public class PlayerController : MonoBehaviour
             {
                 case "Piece":
                     can_pickup = true;
-                    Pickup_prompt.SetActive(true);
-                    Pickup_prompt.transform.position = other.transform.position + Pickup_prompt_position_offset;
                     pickup_object = other.gameObject;
+                    Pickup_prompt.transform.parent = pickup_object.transform;
+                    Pickup_prompt.transform.localPosition =  Pickup_prompt_position_offset;
+                    Pickup_prompt.transform.rotation = Quaternion.Euler(40,0,0);
+                    Pickup_prompt.SetActive(true);
                     break;
                 case "Item":
                     // アイテム触れたらアイテムObj消す
@@ -263,10 +271,12 @@ public class PlayerController : MonoBehaviour
             {
                 case "Piece":
                     can_pickup = false;
+                    Pickup_prompt.transform.parent = this.gameObject.transform;
                     Pickup_prompt.SetActive(false);
                     break;
                 case "Item":
                     can_pickup = false;
+                    Pickup_prompt.transform.parent = this.gameObject.transform;
                     Pickup_prompt.SetActive(false);
                     break;
                 case "Player":
