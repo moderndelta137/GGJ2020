@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         Carrying = false;
         Pickup_prompt.SetActive(false);
-        piecemanager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
         rigidbody = this.GetComponent<Rigidbody>();
     }
 
@@ -98,12 +97,11 @@ public class PlayerController : MonoBehaviour
             //Putting down
             else if (Carrying == true)
             {
-                piecemanager.Last_moved_piece = pickup_object;
+                Debug.Log("Pressed");
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
- 
             }
         }
 
@@ -128,7 +126,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// プレイヤー同士が衝突した際の吹っ飛び処理
     /// </summary>
-    void KnockBack()
+    void KnockBack(Vector3 Hit_direction)
     {
         if (knockBacking) return;
 
@@ -159,7 +157,9 @@ public class PlayerController : MonoBehaviour
 
         // 後ろ向きの力を加える
         float power = 10.0f;
-        rigidbody.AddForce(- transform.forward * power, ForceMode.Impulse);
+        Hit_direction.y = 0;
+        Vector3.Normalize(Hit_direction);
+        rigidbody.AddForce(-Hit_direction * power, ForceMode.Impulse);
         Invoke("returnKnockBack", 1.0f);
     }
     /// <summary>
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Player":
-                KnockBack();
+                KnockBack(other.transform.position-this.transform.position);
                 break;
             default:
                 break;
@@ -206,9 +206,11 @@ public class PlayerController : MonoBehaviour
             {
                 case "Piece":
                     can_pickup = true;
-                    Pickup_prompt.SetActive(true);
-                    Pickup_prompt.transform.position = other.transform.position + Pickup_prompt_position_offset;
                     pickup_object = other.gameObject;
+                    Pickup_prompt.transform.parent = pickup_object.transform;
+                    Pickup_prompt.transform.localPosition =  Pickup_prompt_position_offset;
+                    Pickup_prompt.transform.rotation = Quaternion.Euler(40,0,0);
+                    Pickup_prompt.SetActive(true);
                     break;
                 case "Item":
                     // アイテム触れたらアイテムObj消す
@@ -237,10 +239,12 @@ public class PlayerController : MonoBehaviour
             {
                 case "Piece":
                     can_pickup = false;
+                    Pickup_prompt.transform.parent = this.gameObject.transform;
                     Pickup_prompt.SetActive(false);
                     break;
                 case "Item":
                     can_pickup = false;
+                    Pickup_prompt.transform.parent = this.gameObject.transform;
                     Pickup_prompt.SetActive(false);
                     break;
                 case "Player":
