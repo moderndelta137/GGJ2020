@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class CollectZone : MonoBehaviour
 {
-    public float timeLimit = 300f;
-    
+    public int whichPlayer = 0;
 }
