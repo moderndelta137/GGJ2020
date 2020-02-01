@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
     // For knock back
     private bool knockBacking = false;
     private Rigidbody rigidbody;
+
+    // For drop items
+    private GameObject dropped_object;
+
+
     //Tag definition
     //Piece = 破片
     //Item = 邪魔用アイテム
@@ -79,7 +84,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (pickup_object != null)//Necessary???
                 {
-                    pickup_object.GetComponent<Collider>().isTrigger = false;
+                    //pickup_object.GetComponent<Collider>().isTrigger = false;
                     pickup_object.transform.SetParent(this.gameObject.transform);
                     pickup_object.transform.localPosition = Carrying_position_offset;
                     can_pickup = false;
@@ -106,6 +111,13 @@ public class PlayerController : MonoBehaviour
 
             }
         }
+
+        if(dropped_object)
+        {
+            //Debug.Log(dropped_object);
+            checkPieces();
+
+        }
     }
 
     /// <summary>
@@ -120,15 +132,24 @@ public class PlayerController : MonoBehaviour
         // 持っているアイテムを落とす
         if(Carrying)
         {
+
+            Rigidbody rigidbody_dropped_obj = pickup_object.GetComponent<Rigidbody>();
+
+            // アイテムを地面に置く
+            pickup_object.GetComponent<Collider>().isTrigger = false;
             pickup_object.transform.localPosition = Putdown_position_offset;
             pickup_object.transform.SetParent(null);
-            pickup_object.GetComponent<Collider>().isTrigger = true;
+            rigidbody_dropped_obj.useGravity = true;
+
             Carrying = false;
 
+            // アイテムをランダムな方向に投げる
             float drop_angle = Random.Range(0, 360);
             float drop_power = 10.0f;
-            //Vector3 drop_vector = Qurtanion. * this.transform.forward * drop_power
-            //pickup_object.GetComponent<Rigidbody>().AddForce();
+            Vector3 drop_vector = Quaternion.Euler(0, drop_angle, -60) * this.transform.forward * drop_power;
+            rigidbody_dropped_obj.AddForce(drop_vector, ForceMode.Impulse);
+
+            dropped_object = pickup_object;
         }
 
         // 後ろ向きの力を加える
@@ -145,7 +166,22 @@ public class PlayerController : MonoBehaviour
         knockBacking = false;
     }
 
-    public void OnCollisionEnter(Collision other)
+    /// <summary>
+    /// 飛んで行った破片が地面に落ちたか判定して再設置する
+    /// </summary>
+    void checkPieces()
+    {
+        if(dropped_object.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
+        {
+            dropped_object.GetComponent<Rigidbody>().useGravity = false;
+            dropped_object.GetComponent<Collider>().isTrigger = true;
+            dropped_object.transform.rotation = Quaternion.identity;
+            Vector3 pos = dropped_object.transform.position;
+            dropped_object.transform.position = new Vector3(pos.x, 0.4f, pos.z);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
     {
         switch (other.gameObject.tag)
         {
