@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private Animator player1Animator;
     private Animator player2Animator;
 
+    public bool playerSpdFlg = false;
     public bool playerStunFlg = false;
     public bool playerToughFlg = false;
 
@@ -254,6 +255,9 @@ public class PlayerController : MonoBehaviour
                     // アイテム触れたらアイテムObj消す
                     Destroy(other.gameObject);
                     //
+
+                    if (playerSpdFlg) break;
+                    playerSpdFlg = true;
                     Move_speed = Move_speed * 2;
                     speedUpEffect.SetActive(true);
                     Debug.Log("speedup");
@@ -334,6 +338,7 @@ public class PlayerController : MonoBehaviour
 
     public void returnMoveSpeed()
     {
+        playerSpdFlg = false;
         Move_speed = Move_speed / 2;
         speedUpEffect.SetActive(false);
     }
