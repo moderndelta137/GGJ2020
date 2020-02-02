@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -53,23 +54,16 @@ public class Timer : MonoBehaviour
         // 二人とも破片がそろった場合
         if(player1.currentPiecesCount == MaxPicesCount && player2.currentPiecesCount == MaxPicesCount)
         {
-            Debug.Log("隠しクリア！");
-            finishTextComponent.text = "隠しクリア！";
-        }
-        else if(player1.currentPiecesCount == MaxPicesCount)
-        {
-            Debug.Log("Win Player1 !!");
-            finishTextComponent.text = "Win Player1！";
-        }
-        else if (player2.currentPiecesCount == MaxPicesCount)
-        {
-            Debug.Log("Win Player2 !!");
-            finishTextComponent.text = "Win Player2！";
+            SceneManager.LoadScene("GoodEnding");
+            //finishTextComponent.text = "隠しクリア！";
         }
         else
         {
-            Debug.Log("GameOver");
-            finishTextComponent.text = "Game Over";
+            //時間切れ、片方しか集めてない場合BadEnd
+            SceneManager.LoadScene("BadEnding");
+            //finishTextComponent.text = "Game Over";
         }
+
+
     }
 }
