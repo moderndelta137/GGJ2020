@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     // For drop items
     private GameObject dropped_object;
 
+    public AudioClip itemGetSe;
+    public AudioClip playerClashSe;
 
     //Tag definition
     //Piece = 破片
@@ -232,6 +234,7 @@ public class PlayerController : MonoBehaviour
                     Pickup_prompt.SetActive(true);
                     break;
                 case "SpeedUpItem":
+                    playItemGetSe();
                     // アイテム触れたらアイテムObj消す
                     Destroy(other.gameObject);
                     //
@@ -247,12 +250,14 @@ public class PlayerController : MonoBehaviour
                     */
                     break;
                 case "ToughItem":
+                    playItemGetSe();
                     Destroy(other.gameObject);
                     playerToughFlg = true;
                     toughEffect.SetActive(true);
                     Invoke("returnPlayerTough", 5.0f);
                     break;
                 case "StunItem":
+                    playItemGetSe();
                     // アイテム触れたらアイテムObj消す
                     Destroy(other.gameObject);
                     if (Which_player == 1)
@@ -265,6 +270,7 @@ public class PlayerController : MonoBehaviour
                     }
                     break;
                 case "Player":
+                    playClashSe();
                     break;
             }
         }
@@ -314,5 +320,17 @@ public class PlayerController : MonoBehaviour
     {
         Move_speed = Move_speed / 2;
         speedUpEffect.SetActive(false);
+    }
+
+    public void playItemGetSe()
+    {
+        AudioSource.PlayClipAtPoint(itemGetSe, transform.position);
+
+    }
+
+    public void playClashSe()
+    {
+        AudioSource.PlayClipAtPoint(playerClashSe, transform.position);
+
     }
 }
