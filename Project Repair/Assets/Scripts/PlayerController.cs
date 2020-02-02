@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
     // Effects
     public GameObject speedUpEffect;
     public GameObject toughEffect;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -70,6 +71,7 @@ public class PlayerController : MonoBehaviour
         Carrying = false;
         Pickup_prompt.SetActive(false);
         rigidbody = this.GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
 
         player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
         player2Object = GameObject.Find("Player2").GetComponent<PlayerController>();
@@ -337,13 +339,13 @@ public class PlayerController : MonoBehaviour
 
     public void playItemGetSe()
     {
-        AudioSource.PlayClipAtPoint(itemGetSe, transform.position);
+        audioSource.PlayOneShot(itemGetSe);
 
     }
 
     public void playClashSe()
     {
-        AudioSource.PlayClipAtPoint(playerClashSe, transform.position);
+        audioSource.PlayOneShot(playerClashSe);
 
     }
 }
