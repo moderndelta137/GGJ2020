@@ -573,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 928168463699786765, guid: 70e93d8bfbfcd3245bd9f9bbfcc86a44,
         type: 3}
       propertyPath: timeLimit
-      value: 180
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e93d8bfbfcd3245bd9f9bbfcc86a44, type: 3}
@@ -893,7 +893,7 @@ PrefabInstance:
     - target: {fileID: 2783318369372824635, guid: fea1a32ce67d8b741add41e2547c8f88,
         type: 3}
       propertyPath: distribute_piece
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fea1a32ce67d8b741add41e2547c8f88, type: 3}

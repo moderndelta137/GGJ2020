@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BadEnding.unity
     guid: 2b152560ee7ba495dabf7cd9e0f5fe48
+  - enabled: 1
+    path: Assets/Scenes/Timeout.unity
+    guid: b567623c8b6face43b7ba251086af822
   m_configObjects: {}
