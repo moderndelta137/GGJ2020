@@ -4972,8 +4972,8 @@ MonoBehaviour:
   Move_speed: 0.3
   Rotate_speed: 15
   Carrying: 0
-  Carrying_position_offset: {x: 0, y: -0.6, z: 1}
-  Putdown_position_offset: {x: 0, y: -0.6, z: 1}
+  Carrying_position_offset: {x: 0, y: 0.5, z: 1}
+  Putdown_position_offset: {x: 0, y: 0.5, z: 1}
   Pickup_prompt: {fileID: 3906115492977622361}
   Pickup_prompt_position_offset: {x: 0, y: 1, z: 0}
   itemGetSe: {fileID: 8300000, guid: c0c312b07db6d43438cdee7b731d226b, type: 3}

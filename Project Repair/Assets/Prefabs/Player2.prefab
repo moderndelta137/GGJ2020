@@ -24421,7 +24421,7 @@ GameObject:
   - component: {fileID: 3616629709047464691}
   - component: {fileID: 5870684430279285335}
   m_Layer: 0
-  m_Name: Player2 1
+  m_Name: Player2
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24526,8 +24526,8 @@ MonoBehaviour:
   Move_speed: 0.3
   Rotate_speed: 15
   Carrying: 0
-  Carrying_position_offset: {x: 0, y: -0.6, z: 1}
-  Putdown_position_offset: {x: 0, y: -0.6, z: 1}
+  Carrying_position_offset: {x: 0, y: 0.5, z: 1}
+  Putdown_position_offset: {x: 0, y: 0.5, z: 1}
   Pickup_prompt: {fileID: 5291355719517790898}
   Pickup_prompt_position_offset: {x: 0, y: 1, z: 0}
   itemGetSe: {fileID: 8300000, guid: c0c312b07db6d43438cdee7b731d226b, type: 3}
