@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class CollectZone : MonoBehaviour
 {
-    public int whichPlayer = 0;
+    public List<PieceID> pieces;
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        pieces = new List<PieceID>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 }

@@ -375,6 +375,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 928168463699786765, guid: 70e93d8bfbfcd3245bd9f9bbfcc86a44,
+        type: 3}
+      propertyPath: timeLimit
+      value: 120
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70e93d8bfbfcd3245bd9f9bbfcc86a44, type: 3}
 --- !u!1001 &803464703
@@ -716,7 +721,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1870504801, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
 --- !u!4 &1510952679 stripped
 Transform:
@@ -881,7 +887,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1870504801, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
 --- !u!1001 &1597808261
 PrefabInstance:
