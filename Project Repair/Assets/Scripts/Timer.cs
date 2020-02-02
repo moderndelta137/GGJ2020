@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class Timer : MonoBehaviour
     private PlayerController player1;
     private PlayerController player2;
 
+    private int maxPieceCount;
+
+    private CollectZone collectzone1;
+    private CollectZone collectzone2;
+
     void Start()
     {
         timeTextComponent = timeText.GetComponent<Text>();
@@ -27,6 +33,13 @@ public class Timer : MonoBehaviour
 
         player1 = GameObject.Find("Player1").GetComponent<PlayerController>();
         player2 = GameObject.Find("Player2").GetComponent<PlayerController>();
+
+        // PieceGenerator
+        maxPieceCount = GameObject.Find("PieceGenerator").GetComponent<PieceGenerator>().distribute_piece;
+
+        // CollectZone
+        collectzone1 = GameObject.Find("CollectZone1").GetComponent<CollectZone>();
+        collectzone2 = GameObject.Find("CollectZone2").GetComponent<CollectZone>();
     }
 
     // Update is called once per frame
@@ -50,26 +63,58 @@ public class Timer : MonoBehaviour
 
     void resultCheck()
     {
-        // 二人とも破片がそろった場合
-        if(player1.currentPiecesCount == MaxPicesCount && player2.currentPiecesCount == MaxPicesCount)
+        bool clearFlag = false;
+        
+        // check collectzone1
+
+        List<PieceID> pieces1 = collectzone1.pieces;
+
+        // 全て集まっているかどうか
+        if (pieces1.Count == maxPieceCount)
         {
-            Debug.Log("隠しクリア！");
-            finishTextComponent.text = "隠しクリア！";
+            // ２人のプレイヤーが関わっているかどうか
+            bool player1 = false;
+            bool player2 = false;
+            for (int i = 0; i < pieces1.Count; i++)
+            {
+                if (pieces1[i].lastTouchPlayer == 1) player1 = true;
+                if (pieces1[i].lastTouchPlayer == 2) player2 = true;
+            }
+
+            if (player1 && player2) clearFlag = true;
         }
-        else if(player1.currentPiecesCount == MaxPicesCount)
+
+        // check collectzone1
+
+        List<PieceID> pieces2 = collectzone2.pieces;
+
+        // 全て集まっているかどうか
+        if (pieces2.Count == maxPieceCount)
         {
-            Debug.Log("Win Player1 !!");
-            finishTextComponent.text = "Win Player1！";
+            // ２人のプレイヤーが関わっているかどうか
+            bool player1 = false;
+            bool player2 = false;
+            for (int i = 0; i < pieces2.Count; i++)
+            {
+                if (pieces2[i].lastTouchPlayer == 1) player1 = true;
+                if (pieces2[i].lastTouchPlayer == 2) player2 = true;
+            }
+
+            if (player1 && player2) clearFlag = true;
         }
-        else if (player2.currentPiecesCount == MaxPicesCount)
+
+        if (clearFlag)
         {
-            Debug.Log("Win Player2 !!");
-            finishTextComponent.text = "Win Player2！";
+            SceneManager.LoadScene("GoodEnding");
+            //finishTextComponent.text = "隠しクリア！";
         }
         else
         {
-            Debug.Log("GameOver");
-            finishTextComponent.text = "Game Over";
+            //時間切れ、片方しか集めてない場合BadEnd
+            SceneManager.LoadScene("BadEnding");
+            //finishTextComponent.text = "Game Over";
         }
+
+
     }
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PieceID : MonoBehaviour
 {
-    // Whose piece
-    public int whichPiece;
+    // id
+    public int id;
+
+    // 最後に触れたプレイヤーを記録(0:まだ誰も触っていない。1:プレイヤー1 2: プレイヤー2)
+    public int lastTouchPlayer;
 
     // Whether this is collected
     public bool isCollected = false;
@@ -32,22 +35,10 @@ public class PieceID : MonoBehaviour
             if (isCollected) return;
             this.isCollected = true;
 
+            // CollectZoneのPiecesリストに自分自身を追加
             CollectZone collectZone = other.GetComponent<CollectZone>();
+            collectZone.pieces.Add(this);
 
-            // 相手の収集ゾーンの場合は無視
-            if (collectZone.whichPlayer != whichPiece) return;
-
-            // 集めた破片の数をプラス１
-            if (whichPiece == 1)
-            {
-                Debug.Log("Player1 Score");
-                player1.currentPiecesCount++;
-            }
-            else
-            {
-                Debug.Log("Player2 Score");
-                player2.currentPiecesCount++;
-            }
         }
     }
     private void OnTriggerExit(Collider other)
@@ -58,19 +49,14 @@ public class PieceID : MonoBehaviour
             if (!isCollected) return;
             this.isCollected = false;
 
+            // 自分を削除
             CollectZone collectZone = other.GetComponent<CollectZone>();
-
-            // 相手の収集ゾーンの場合は無視
-            if (collectZone.whichPlayer != whichPiece) return;
-
-            // 集めた破片の数をマイナス１
-            if (whichPiece == 1)
+            for (int i = 0; i < collectZone.pieces.Count; i++)
             {
-                player1.currentPiecesCount--;
-            }
-            else
-            {
-                player2.currentPiecesCount--;
+                if(collectZone.pieces[i].id == this.id)
+                {
+                    collectZone.pieces.RemoveAt(i);
+                }
             }
         }
     }
