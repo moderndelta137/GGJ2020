@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c1556c3b700d943ba94adbdaf5092e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 180
+  timeLimit: 90
 --- !u!4 &928168464419025564
 Transform:
   m_ObjectHideFlags: 0
@@ -1220,7 +1220,7 @@ PrefabInstance:
     - target: {fileID: 7653302183834972996, guid: b92113378e6e84fc6a8f71d674039d17,
         type: 3}
       propertyPath: Move_speed
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7653302183834972996, guid: b92113378e6e84fc6a8f71d674039d17,
         type: 3}
@@ -1364,7 +1364,7 @@ PrefabInstance:
     - target: {fileID: 1544199674329967791, guid: 280c47050282e4feebcb6ee1bac39a31,
         type: 3}
       propertyPath: Move_speed
-      value: 0.02
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 1544199674329967791, guid: 280c47050282e4feebcb6ee1bac39a31,
         type: 3}

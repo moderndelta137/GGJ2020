@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Timeout.unity
     guid: b567623c8b6face43b7ba251086af822
+  - enabled: 1
+    path: Assets/Scenes/TrueEndingScene.unity
+    guid: bec30e105d3fc415b85c63fbd664a236
   m_configObjects: {}

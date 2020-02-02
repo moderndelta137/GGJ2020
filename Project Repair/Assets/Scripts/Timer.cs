@@ -24,6 +24,8 @@ public class Timer : MonoBehaviour
     private CollectZone collectzone1;
     private CollectZone collectzone2;
 
+    private ClearType clearType;
+
     void Start()
     {
         timeTextComponent = timeText.GetComponent<Text>();
@@ -45,6 +47,8 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        resultCheck();
+
         if (time > 0)
         {
             time -= Time.deltaTime;
@@ -55,7 +59,7 @@ public class Timer : MonoBehaviour
             finishText.SetActive(true);
             time = 0;
 
-            resultCheck();
+            timeup();
         }
 
         timeTextComponent.text = "Time : " + time.ToString("f1");
@@ -68,10 +72,10 @@ public class Timer : MonoBehaviour
         TIMEOUT
     }
 
-    void resultCheck()
+    ClearType resultCheck()
     {
-        ClearType clearType = ClearType.TIMEOUT;
-        
+        clearType = ClearType.TIMEOUT;
+
         // check collectzone1
 
         List<PieceID> pieces1 = collectzone1.pieces;
@@ -91,6 +95,7 @@ public class Timer : MonoBehaviour
             if (player1 && player2)
             {
                 clearType = ClearType.TRUE;
+                SceneManager.LoadScene("TrueEndingScene");
             }
             else
             {
@@ -117,17 +122,24 @@ public class Timer : MonoBehaviour
             if (player1 && player2)
             {
                 clearType = ClearType.TRUE;
+                SceneManager.LoadScene("TrueEndingScene");
             }
             else
             {
                 clearType = ClearType.BAD;
             }
-            
+
         }
+
+        return clearType;
+    }
+
+    void timeup()
+    {
 
         if (clearType == ClearType.TRUE)
         {
-            SceneManager.LoadScene("GoodEnding");
+            SceneManager.LoadScene("TrueEndingScene");
             //finishTextComponent.text = "隠しクリア！";
         }
         else if(clearType == ClearType.BAD)
