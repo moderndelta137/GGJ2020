@@ -61,9 +61,16 @@ public class Timer : MonoBehaviour
         timeTextComponent.text = "Time : " + time.ToString("f1");
     }
 
+    enum ClearType
+    {
+        TRUE,
+        BAD,
+        TIMEOUT
+    }
+
     void resultCheck()
     {
-        bool clearFlag = false;
+        ClearType clearType = ClearType.TIMEOUT;
         
         // check collectzone1
 
@@ -81,7 +88,14 @@ public class Timer : MonoBehaviour
                 if (pieces1[i].lastTouchPlayer == 2) player2 = true;
             }
 
-            if (player1 && player2) clearFlag = true;
+            if (player1 && player2)
+            {
+                clearType = ClearType.TRUE;
+            }
+            else
+            {
+                clearType = ClearType.BAD;
+            }
         }
 
         // check collectzone1
@@ -100,18 +114,30 @@ public class Timer : MonoBehaviour
                 if (pieces2[i].lastTouchPlayer == 2) player2 = true;
             }
 
-            if (player1 && player2) clearFlag = true;
+            if (player1 && player2)
+            {
+                clearType = ClearType.TRUE;
+            }
+            else
+            {
+                clearType = ClearType.BAD;
+            }
+            
         }
 
-        if (clearFlag)
+        if (clearType == ClearType.TRUE)
         {
             SceneManager.LoadScene("GoodEnding");
             //finishTextComponent.text = "隠しクリア！";
         }
-        else
+        else if(clearType == ClearType.BAD)
         {
             //時間切れ、片方しか集めてない場合BadEnd
             SceneManager.LoadScene("BadEnding");
+        }
+        else
+        {
+            SceneManager.LoadScene("Timeout");
             //finishTextComponent.text = "Game Over";
         }
 
