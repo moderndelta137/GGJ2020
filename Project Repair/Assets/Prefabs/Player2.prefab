@@ -283,13 +283,8 @@ MonoBehaviour:
   Carry_rotate_speed: {x: 0, y: 1, z: 0}
   playerStunFlg: 0
   playerToughFlg: 0
-<<<<<<< HEAD
-  speedUpEffect: {fileID: 108658406598333911}
-  toughEffect: {fileID: 673502719091411901}
-=======
   speedUpEffect: {fileID: 0}
   toughEffect: {fileID: 0}
->>>>>>> 15a4502ae241092db9469895ba7fa4b4a32c45a5
 --- !u!54 &336027168484870954
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -306,10 +301,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
-<<<<<<< HEAD
---- !u!1001 &181026376077188461
-PrefabInstance:
-=======
 --- !u!82 &2962114654849625883
 AudioSource:
   m_ObjectHideFlags: 0
@@ -408,7 +399,6 @@ AudioSource:
     m_RotationOrder: 4
 --- !u!1 &5726510984518595315
 GameObject:
->>>>>>> 15a4502ae241092db9469895ba7fa4b4a32c45a5
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
