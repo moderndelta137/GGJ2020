@@ -214,6 +214,7 @@ public class PlayerController : MonoBehaviour
         {
             dropped_object.GetComponent<Collider>().isTrigger = true;
             dropped_object.GetComponent<Rigidbody>().useGravity = false;
+            dropped_object.GetComponent<Rigidbody>().isKinematic = true;
             dropped_object.transform.rotation = Quaternion.identity;
             Vector3 pos = dropped_object.transform.position;
             dropped_object.transform.position = new Vector3(pos.x, 0.4f, pos.z);
