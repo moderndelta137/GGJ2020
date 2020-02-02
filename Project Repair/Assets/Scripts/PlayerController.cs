@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 move_transform = Vector3.zero;
 
 
-
-
     //Pickup Related
     //Whether if the object can be picked up
     private bool can_pickup;
@@ -105,6 +103,7 @@ public class PlayerController : MonoBehaviour
                     pickup_object.transform.SetParent(this.gameObject.transform);
                     pickup_object.transform.localPosition = Carrying_position_offset;
                     pickup_object.GetComponent<Rigidbody>().isKinematic = true;
+                    pickup_object.GetComponent<PieceID>().lastTouchPlayer = Which_player;
                     can_pickup = false;
                     Carrying = true;
                     Pickup_prompt.SetActive(false);

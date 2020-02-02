@@ -30,12 +30,10 @@ public class ItemGenerator : MonoBehaviour
 
         // シーン上のオブジェクトの数を数える
         tagObject = GameObject.FindGameObjectsWithTag("Item");
-        Debug.Log("itemCount:::::" + tagObject.Length);
 
         // 10個以下なら
         if (tagObject.Length <= 10)
         {
-            Debug.Log("time:::::" + this.timer);
             if (timer >= interval)
             {
                 // シーン上に生成

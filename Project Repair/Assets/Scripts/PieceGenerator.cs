@@ -21,19 +21,10 @@ public class PieceGenerator : MonoBehaviour
         {
             instantiated_piece = Instantiate(pieceObject, new Vector3(Random.Range(-distribute_range.x, distribute_range.x), distribute_range.y, Random.Range(-distribute_range.z, distribute_range.z)), Quaternion.identity);
             pieceid = instantiated_piece.GetComponent<PieceID>();
-            if(i< distribute_piece / 2)
-            {
-                pieceid.whichPiece = 1;
-                pieceid.gameObject.GetComponent<MeshRenderer>().material = Player1_piece_mat;
-                Debug.Log("Player1 Piece");
-            }
-            else
-            {
-                pieceid.whichPiece = 2;
-                pieceid.gameObject.GetComponent<MeshRenderer>().material = Player2_piece_mat;
-                Debug.Log("Player2 Piece");
-            }
-
+            pieceid.id = i;
+            pieceid.lastTouchPlayer = 0;
+            pieceid.isCollected = false;
+            pieceid.gameObject.GetComponent<MeshRenderer>().material = Player1_piece_mat;
         }
         
     }
