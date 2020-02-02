@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class ItemGenerator : MonoBehaviour
 {
-    public GameObject itemObject;
+    public GameObject toughItem;
+    public GameObject speedUpItem;
+    public GameObject stunItem;
+
     public GameObject[] tagObject;
     public float interval = 10.0f;
     private float timer = 0.0f;
+
+    public float xrange_min;
+    public float xrange_max;
+    public float zrange_min;
+    public float zrange_max;
 
     // 取り敢えず一旦5個
     public int distribute_piece = 5;
@@ -19,7 +27,22 @@ public class ItemGenerator : MonoBehaviour
         // Itemをランダム生成
         for (int i = 0; i < this.distribute_piece; i++)
         {
-            Instantiate(itemObject, new Vector3(Random.Range(-15.0f, 15.0f), 0.7f, Random.Range(-15.0f, 10.0f)), Quaternion.identity);
+            int rnd = Random.Range(0, 2);
+            GameObject itemObject;
+            if(rnd == 0)
+            {
+                itemObject = toughItem;
+            }
+            else if(rnd == 1)
+            {
+                itemObject = speedUpItem;
+            }
+            else
+            {
+                itemObject = stunItem;
+            }
+
+            Instantiate(itemObject, new Vector3(Random.Range(xrange_min, xrange_max), 0.7f, Random.Range(zrange_min, zrange_max)), Quaternion.identity);
         }
 
     }
@@ -36,8 +59,23 @@ public class ItemGenerator : MonoBehaviour
         {
             if (timer >= interval)
             {
+                int rnd = Random.Range(0, 2);
+                GameObject itemObject;
+                if (rnd == 0)
+                {
+                    itemObject = toughItem;
+                }
+                else if (rnd == 1)
+                {
+                    itemObject = speedUpItem;
+                }
+                else
+                {
+                    itemObject = stunItem;
+                }
+
                 // シーン上に生成
-                Instantiate(itemObject, new Vector3(Random.Range(-15.0f, 15.0f), 0.7f, Random.Range(-15.0f, 10.0f)), Quaternion.identity);
+                Instantiate(itemObject, new Vector3(Random.Range(xrange_min, xrange_max), 0.7f, Random.Range(zrange_min, zrange_max)), Quaternion.identity);
                 timer = 0.0f;
             }
         }

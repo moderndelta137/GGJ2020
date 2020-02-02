@@ -24533,6 +24533,7 @@ MonoBehaviour:
   itemGetSe: {fileID: 8300000, guid: c0c312b07db6d43438cdee7b731d226b, type: 3}
   playerClashSe: {fileID: 8300000, guid: 9039d5cafeee64e00b7a9d0727a4c0bf, type: 3}
   Carry_rotate_speed: {x: 0, y: 1, z: 0}
+  playerSpdFlg: 0
   playerStunFlg: 0
   playerToughFlg: 0
   speedUpEffect: {fileID: 0}
@@ -29717,6 +29718,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13711148, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e9dc7796c5b48844944784a084d59d5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
 --- !u!4 &1264645903856095475 stripped
