@@ -171,17 +171,17 @@ PrefabInstance:
     - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.65
       objectReference: {fileID: 0}
     - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.16
       objectReference: {fileID: 0}
     - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.89
       objectReference: {fileID: 0}
     - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
         type: 3}
@@ -222,6 +222,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8610182987044948975, guid: 7c9217ec0471e8c4381cec589cd1b5c8,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c9217ec0471e8c4381cec589cd1b5c8, type: 3}
@@ -404,6 +419,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -194.73601
       objectReference: {fileID: 0}
+    - target: {fileID: 6477152, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9530184, guid: 33cf96e7c28302643ace35c3d203f5e0, type: 3}
       propertyPath: m_Controller
       value: 
@@ -542,6 +561,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1669858196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &394097675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394097669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ee76aa5a2a60b43b9eb6f73e36dcc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &600589716
 GameObject:
   m_ObjectHideFlags: 0
@@ -5822,6 +5853,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 6.3672347
       objectReference: {fileID: 0}
+    - target: {fileID: 4241569074610760, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241569074610760, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241569074610760, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4241569074610760, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4333256119028582, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -46.18109
@@ -5972,7 +6019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679013640650686, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.0600001
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: 4679013640650686, guid: f85c4948bfaac4e48b32c1254bdec6b8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6390,7 +6437,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.38652548, g: 0.6067551, b: 0.9528302, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
