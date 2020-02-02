@@ -532,6 +532,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2690569846233583511, guid: f8a26b90c15f3f241a21ede7c153c11d,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690569846233583511, guid: f8a26b90c15f3f241a21ede7c153c11d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2690569846233583511, guid: f8a26b90c15f3f241a21ede7c153c11d,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2690569846374144977, guid: f8a26b90c15f3f241a21ede7c153c11d,
         type: 3}
       propertyPath: m_Name
@@ -651,6 +666,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 443481305, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1716393838170462471, guid: 3e1150612d887b34685ed7205ecd598d,
         type: 3}
       propertyPath: speedUpEffect
@@ -661,6 +680,11 @@ PrefabInstance:
       propertyPath: toughEffect
       value: 
       objectReference: {fileID: 1292012688841438233}
+    - target: {fileID: 1716393838170462471, guid: 3e1150612d887b34685ed7205ecd598d,
+        type: 3}
+      propertyPath: Move_speed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5463263871524714760, guid: 3e1150612d887b34685ed7205ecd598d,
         type: 3}
       propertyPath: m_Name
@@ -817,6 +841,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 443481305, guid: 3e1150612d887b34685ed7205ecd598d, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1716393838170462471, guid: 3e1150612d887b34685ed7205ecd598d,
         type: 3}
       propertyPath: Which_player
@@ -832,6 +860,11 @@ PrefabInstance:
       propertyPath: toughEffect
       value: 
       objectReference: {fileID: 113984068}
+    - target: {fileID: 1716393838170462471, guid: 3e1150612d887b34685ed7205ecd598d,
+        type: 3}
+      propertyPath: Move_speed
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5463263871524714760, guid: 3e1150612d887b34685ed7205ecd598d,
         type: 3}
       propertyPath: m_Name
