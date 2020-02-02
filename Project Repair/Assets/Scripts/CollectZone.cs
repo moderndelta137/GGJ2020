@@ -13,5 +13,9 @@ public class CollectZone : MonoBehaviour
 
     void Update()
     {
+        for (int i = 0; i < pieces.Count; i++)
+        {
+            Debug.Log("piece:" + i + " " + pieces[i].id);
+        }
     }
 }

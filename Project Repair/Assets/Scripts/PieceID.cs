@@ -13,6 +13,8 @@ public class PieceID : MonoBehaviour
     // Whether this is collected
     public bool isCollected = false;
 
+    public GameObject effect;
+
     private PlayerController player1;
     private PlayerController player2;
     void Start()
@@ -34,6 +36,7 @@ public class PieceID : MonoBehaviour
             // 複数回呼び出されるのを防ぐ
             if (isCollected) return;
             this.isCollected = true;
+            effect.SetActive(true);
 
             // CollectZoneのPiecesリストに自分自身を追加
             CollectZone collectZone = other.GetComponent<CollectZone>();
@@ -48,6 +51,7 @@ public class PieceID : MonoBehaviour
             // 複数回呼び出されるのを防ぐ
             if (!isCollected) return;
             this.isCollected = false;
+            effect.SetActive(false);
 
             // 自分を削除
             CollectZone collectZone = other.GetComponent<CollectZone>();

@@ -30,7 +30,7 @@ public class TitleScene : MonoBehaviour
 
     public void Loadmaingame()
     {
-        SceneManager.LoadScene("GameMasterScene");
+        SceneManager.LoadScene("GameMasterScene_mori");
     }
 
 }

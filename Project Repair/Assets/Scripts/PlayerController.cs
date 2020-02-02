@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     private Animator player1Animator;
     private Animator player2Animator;
 
+    public bool playerSpdFlg = false;
     public bool playerStunFlg = false;
     public bool playerToughFlg = false;
 
@@ -123,7 +124,7 @@ public class PlayerController : MonoBehaviour
             {
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
-                pickup_object.GetComponent<Rigidbody>().isKinematic = false;
+                pickup_object.GetComponent<Rigidbody>().isKinematic = true;
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
             }
@@ -213,6 +214,7 @@ public class PlayerController : MonoBehaviour
         {
             dropped_object.GetComponent<Collider>().isTrigger = true;
             dropped_object.GetComponent<Rigidbody>().useGravity = false;
+            dropped_object.GetComponent<Rigidbody>().isKinematic = true;
             dropped_object.transform.rotation = Quaternion.identity;
             Vector3 pos = dropped_object.transform.position;
             dropped_object.transform.position = new Vector3(pos.x, 0.4f, pos.z);
@@ -253,6 +255,9 @@ public class PlayerController : MonoBehaviour
                     // アイテム触れたらアイテムObj消す
                     Destroy(other.gameObject);
                     //
+
+                    if (playerSpdFlg) break;
+                    playerSpdFlg = true;
                     Move_speed = Move_speed * 2;
                     speedUpEffect.SetActive(true);
                     Debug.Log("speedup");
@@ -333,6 +338,7 @@ public class PlayerController : MonoBehaviour
 
     public void returnMoveSpeed()
     {
+        playerSpdFlg = false;
         Move_speed = Move_speed / 2;
         speedUpEffect.SetActive(false);
     }
