@@ -57,6 +57,10 @@ public class PlayerController : MonoBehaviour
     public bool playerStunFlg = false;
     public bool playerToughFlg = false;
 
+    // Effects
+    public GameObject speedUpEffect;
+    public GameObject toughEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,8 @@ public class PlayerController : MonoBehaviour
 
         player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
         player2Object = GameObject.Find("Player2").GetComponent<PlayerController>();
+        speedUpEffect.SetActive(false);
+        toughEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -107,7 +113,6 @@ public class PlayerController : MonoBehaviour
             //Putting down
             else if (Carrying == true)
             {
-                Debug.Log("Pressed");
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
                 pickup_object.GetComponent<Rigidbody>().isKinematic = false;
@@ -227,11 +232,13 @@ public class PlayerController : MonoBehaviour
                     Pickup_prompt.transform.rotation = Quaternion.Euler(40,0,0);
                     Pickup_prompt.SetActive(true);
                     break;
-                case "Item":
+                case "SpeedUpItem":
                     // アイテム触れたらアイテムObj消す
                     Destroy(other.gameObject);
                     //
                     Move_speed = Move_speed * 2;
+                    speedUpEffect.SetActive(true);
+                    Debug.Log("speedup");
                     Invoke("returnMoveSpeed", 5.0f);
                     /*
                     can_pickup = true;
@@ -243,6 +250,7 @@ public class PlayerController : MonoBehaviour
                 case "ToughItem":
                     Destroy(other.gameObject);
                     playerToughFlg = true;
+                    toughEffect.SetActive(true);
                     Invoke("returnPlayerTough", 5.0f);
                     break;
                 case "StunItem":
@@ -300,10 +308,12 @@ public class PlayerController : MonoBehaviour
     public void returnPlayerTough()
     {
         playerToughFlg = false;
+        toughEffect.SetActive(false);
     }
 
     public void returnMoveSpeed()
     {
         Move_speed = Move_speed / 2;
+        speedUpEffect.SetActive(false);
     }
 }
