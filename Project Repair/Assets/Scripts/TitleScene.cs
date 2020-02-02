@@ -16,7 +16,7 @@ public class TitleScene : MonoBehaviour
     {
         if (Input.GetButtonDown("Pickup1") || Input.GetButtonDown("Pickup2"))
         {
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("GameMasterScene");
         }
 
     }
