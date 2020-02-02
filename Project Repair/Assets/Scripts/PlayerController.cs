@@ -54,6 +54,9 @@ public class PlayerController : MonoBehaviour
     private PlayerController player1Object;
     private PlayerController player2Object;
 
+    private Animator player1Animator;
+    private Animator player2Animator;
+
     public bool playerStunFlg = false;
     public bool playerToughFlg = false;
 
@@ -66,6 +69,8 @@ public class PlayerController : MonoBehaviour
 
         player1Object = GameObject.Find("Player1").GetComponent<PlayerController>();
         player2Object = GameObject.Find("Player2").GetComponent<PlayerController>();
+        player1Animator = GameObject.Find("Chara_4Hero").GetComponent<Animator>();
+        player2Animator = GameObject.Find("ChaWitch").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -172,7 +177,15 @@ public class PlayerController : MonoBehaviour
         Vector3.Normalize(Hit_direction);
         rigidbody.AddForce(-Hit_direction * power, ForceMode.Impulse);
         Invoke("returnKnockBack", 1.0f);
+
+        //Damageアニメーション
+        player1Animator.SetBool("IsDamage", true);
+        player2Animator.SetBool("isDamage", true);
+
+        player1Animator.SetBool("IsDamage", false);
+        player2Animator.SetBool("isDamage", false);
     }
+
     /// <summary>
     /// 数秒後にKnockBackから回復する。knockBackingフラグを戻す。
     /// </summary>
