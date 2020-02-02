@@ -205,10 +205,14 @@ MonoBehaviour:
   Putdown_position_offset: {x: 0, y: -0.6, z: 1}
   Pickup_prompt: {fileID: 641740309986984550}
   Pickup_prompt_position_offset: {x: 0, y: 1, z: 0}
+  itemGetSe: {fileID: 8300000, guid: c0c312b07db6d43438cdee7b731d226b, type: 3}
+  playerClashSe: {fileID: 8300000, guid: 9039d5cafeee64e00b7a9d0727a4c0bf, type: 3}
   Carry_rotate_speed: {x: 0, y: 1, z: 0}
   playerStunFlg: 0
   playerToughFlg: 0
---- !u!54 &4843202358853577125
+  speedUpEffect: {fileID: 0}
+  toughEffect: {fileID: 0}
+--- !u!54 &443481305
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
