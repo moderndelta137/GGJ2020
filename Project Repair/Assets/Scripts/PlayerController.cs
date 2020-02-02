@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
             {
                 pickup_object.transform.localPosition = Putdown_position_offset;
                 pickup_object.transform.SetParent(null);
-                pickup_object.GetComponent<Rigidbody>().isKinematic = false;
+                pickup_object.GetComponent<Rigidbody>().isKinematic = true;
                 pickup_object.GetComponent<Collider>().isTrigger = true;
                 Carrying = false;
             }
