@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         //move_input = Vector3.Normalize(move_input);
         move_transform = move_input * Move_speed;
         //Move character
-        transform.Translate(move_transform, Space.World);
+        //transform.Translate(move_transform, Space.World);//Move the translate function to FixedUpdate
         //Rotate character towards the moving direction;
         float singleStep = Rotate_speed * Time.deltaTime;
         Vector3 newDirection = Vector3.RotateTowards(transform.forward, move_input, singleStep, 0.0f);
@@ -147,6 +147,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    //Move the character
+    void FixedUpdate()
+    {
+        transform.Translate(move_transform, Space.World);
+    }
+
 
     /// <summary>
     /// プレイヤー同士が衝突した際の吹っ飛び処理
